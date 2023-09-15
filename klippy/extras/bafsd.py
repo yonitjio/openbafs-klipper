@@ -78,7 +78,9 @@ class Bafsd:
         self.servo_off_deg = list(config.getintlist('servo_off_deg', [90, 90, 90, 90]))
         self.sensor_to_gear_distance = config.getint('sensor_to_gear_distance', 35)
         self.sensor_to_gear_margin = config.getint('sensor_to_gear_margin', 5)
-        self.filament_catching_margin =config.getint('filament_catching_margin', 2)
+        self.filament_catching_margin = config.getint('filament_catching_margin', 2)
+        self.pause_macro = config.get('pause_macro', 'PAUSE')
+
 
         self.fil_sensor = self.printer.lookup_object("state_button %s" % self.fil_sensor_name, None)
         self.servos = [self.printer.lookup_object("servo %s" % self.servo_names[0], None),
@@ -353,6 +355,7 @@ class Bafsd:
 
         if fil_status == "ABSENT":
             self._log("Failed to load to sensor")
+            self.gcode.run_script_from_command(self.pause_macro)
 
         self._set_port(port)
 
