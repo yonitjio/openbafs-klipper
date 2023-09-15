@@ -1,3 +1,7 @@
+This repo is for using BAFSD with Klipper
+
+---
+
 Welcome to the Klipper project!
 
 [![Klipper](docs/img/klipper-logo-small.png)](https://www.klipper3d.org/)
